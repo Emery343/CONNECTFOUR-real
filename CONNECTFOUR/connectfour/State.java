@@ -45,14 +45,19 @@ public class State
 
     public int getBoardCell(int row, int col) {
         if (row >= 0 && row < Constants.BOARD_ROWS && col >= 0 && col < Constants.BOARD_COLUMNS) {
-            return this.board[row][col];
+             return this.board[row][col]; 
         } else {
+            System.out.println("Invalid row or column index.");
             return Constants.INVALID_CELL;
         }
     }
 
     public void setBoardCell(int row, int col, int value) {
-        this.board[row][col] = value;
+        if (row >= 0 && row < Constants.BOARD_ROWS && col >= 0 && col < Constants.BOARD_COLUMNS) {
+            this.board[row][col] = value;
+        } else {
+            System.out.println("Invalid row or column index.");
+        }
     }
 
     public boolean isWinner() {

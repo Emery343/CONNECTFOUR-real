@@ -40,28 +40,34 @@ public class UI
     }
 
     public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row = 0;
-        while (row <= 0 || row >= 7) {
+        int row = -1;
+        while (row < 1 || row > Constants.BOARD_ROWS) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 row = scanner.nextInt();
+                if (row < 1 || row > Constants.BOARD_ROWS) {
+                    throw new IllegalArgumentException();
+                }
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
+                scanner.nextLine(); // consume the invalid input
             }
         }
         return row;
     }
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
-        int col = 0;
-        while (col <= 0 || col >= 8) {
+        int col = -1;
+        while (col < 1 || col > Constants.BOARD_COLUMNS) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
+                if (col < 1 || col > Constants.BOARD_COLUMNS) {
+                    throw new IllegalArgumentException();
+                }
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.next();
+                scanner.nextLine(); // consume the invalid input
             }
         }
         return col;
@@ -79,14 +85,10 @@ public class UI
     }
 
     public void printBoard(State state) {
-        System.out.println(Constants.DIVIDER_STRING);
-        for (int row = 0; row < Constants.BOARD_ROWS; row++) {
-            for (int col = 0; col < Constants.BOARD_COLUMNS; col++) {
-                System.out.print(getXOrO(state.getBoardCell(row,col)) + " ");
-            }
-            System.out.println();
+        for (int count = 0; count <= 5; count ++) { 
             System.out.println(Constants.DIVIDER_STRING);
-        }
+            System.out.println(Constants.BOARD_STRING);
+        }  System.out.println(Constants.DIVIDER_STRING);
     }
 
     public void printInvalidRowOrColumn(int rowOrCol) {
@@ -110,10 +112,10 @@ public class UI
     public void printTieGame() {
         System.out.println(Constants.TIE_GAME);
     }
-    
+
     public void resetBoard (State state) {
         state.clearBoard();
         System.out.println("Board reset.");
     }
 }
-    
+ 
