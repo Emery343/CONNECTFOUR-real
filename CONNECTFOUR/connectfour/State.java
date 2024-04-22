@@ -44,12 +44,11 @@ public class State
     }
 
     public int getBoardCell(int row, int col) {
-        if (row >= 0 && row < Constants.BOARD_ROWS && col >= 0 && col < Constants.BOARD_COLUMNS) {
-             return this.board[row][col]; 
-        } else {
-            System.out.println("Invalid row or column index.");
-            return Constants.INVALID_CELL;
-        }
+        if (row >= 0 && row < Constants.BOARD_ROWS) {
+            if (col >= 0 && col < Constants.BOARD_COLUMNS) {
+                return this.board[row][col]; 
+            }
+        } return 0;
     }
 
     public void setBoardCell(int row, int col, int value) {
@@ -97,7 +96,7 @@ public class State
     }
 
     public State() {
-        board = new int[Constants.BOARD_COLUMNS][Constants.BOARD_ROWS];
+        board = new int[Constants.BOARD_ROWS][Constants.BOARD_COLUMNS];
         // Initialize other variables as needed
     }
 

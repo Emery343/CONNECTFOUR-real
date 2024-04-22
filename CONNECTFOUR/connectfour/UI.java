@@ -39,26 +39,9 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row = -1;
-        while (row < 1 || row > Constants.BOARD_ROWS) {
-            try {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                row = scanner.nextInt();
-                if (row < 1 || row > Constants.BOARD_ROWS) {
-                    throw new IllegalArgumentException();
-                }
-            } catch (Exception e) {
-                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                scanner.nextLine(); // consume the invalid input
-            }
-        }
-        return row;
-    }
-
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = -1;
-        while (col < 1 || col > Constants.BOARD_COLUMNS) {
+        while (col > 1 || col < Constants.BOARD_COLUMNS) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
@@ -86,8 +69,15 @@ public class UI
 
     public void printBoard(State state) {
         System.out.println(Constants.DIVIDER_STRING);
-        for (int row = 0; row <= 5; row ++) { 
-            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row,0)), getXOrO(state.getBoardCell(row,1)), getXOrO(state.getBoardCell(row,2)), getXOrO(state.getBoardCell(row,3)), getXOrO(state.getBoardCell(row,4)), getXOrO(state.getBoardCell(row,5)));
+        for (int row = 0; row < Constants.BOARD_ROWS; row++) { 
+            System.out.printf(Constants.BOARD_STRING, 
+            getXOrO(state.getBoardCell(row,0)), 
+            getXOrO(state.getBoardCell(row,1)), 
+            getXOrO(state.getBoardCell(row,2)), 
+            getXOrO(state.getBoardCell(row,3)), 
+            getXOrO(state.getBoardCell(row,4)), 
+            getXOrO(state.getBoardCell(row,5)),
+            getXOrO(state.getBoardCell(row,6)));
             System.out.println();   
             System.out.println(Constants.DIVIDER_STRING);
         } 

@@ -31,7 +31,7 @@ public class Constants
     public static final int INVALID_CELL = -2;
     
     // Strings
-    public static final String DIVIDER_STRING = "|----|----|----|----|----|----|----|";
+    public static final String DIVIDER_STRING = "|---|---|---|---|---|---|---|";
     public static final String BOARD_STRING   = "| %s | %s | %s | %s | %s | %s | %s |";
     public static final String GET_PLAYER_NAME = "Player %s: What is your name? --> ";
     public static final String TITLE = "Thanks for playing Connect Four!";
