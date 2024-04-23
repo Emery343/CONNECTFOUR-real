@@ -43,7 +43,7 @@ public class State
         this.oName = oName;
     }
 
-    public int getBoardCell(int row, int col) {
+    public int getBoardCell(int row,int col) {
         if (row >= 0 && row < Constants.BOARD_ROWS) {
             if (col >= 0 && col < Constants.BOARD_COLUMNS) {
                 return this.board[row][col]; 
@@ -51,11 +51,21 @@ public class State
         } return 0;
     }
 
-    public void setBoardCell(int row, int col, int value) {
-        if (row >= 0 && row < Constants.BOARD_ROWS && col >= 0 && col < Constants.BOARD_COLUMNS) {
-            this.board[row][col] = value;
+    public void setBoardCell(int col, int value) {
+        if (col >= 0 && col < Constants.BOARD_COLUMNS) {
+            boolean columnFull = true;
+            for (int row = Constants.BOARD_ROWS - 1; row >= 0; row--) {
+                if (this.board[row][col] == ' ') {
+                    this.board[row][col] = value;
+                    columnFull = false; // At least one empty cell found, so column is not full
+                    break;
+                }
+            }
+            if (columnFull) {
+                System.out.println(Constants.COLUMN_FULL);
+            }
         } else {
-            System.out.println("Invalid row or column index.");
+            System.out.println("Invalid column index.");
         }
     }
 
@@ -83,7 +93,7 @@ public class State
 
     public boolean isTie() {
         // Check if all spaces on the board are filled
-        for (int i = 0; i < Constants.BOARD_COLUMNS; i++) {
+        for (int i = 0; i < Constants.BOARD_ROWS; i++) {
             for (int j = 0; j < Constants.BOARD_COLUMNS; j++) {
                 if (board[i][j] == Constants.BLANK) {
                     return false; // There's an empty space, game is not a tie
@@ -103,7 +113,7 @@ public class State
     // Other methods in the State class
 
     public void clearBoard() {
-        for (int i = 0; i < Constants.BOARD_COLUMNS; i++) {
+        for (int i = 0; i < Constants.BOARD_ROWS; i++) {
             for (int j = 0; j < Constants.BOARD_COLUMNS; j++) {
                 board[i][j] = Constants.BLANK;
             }
@@ -112,3 +122,4 @@ public class State
 
     // Getter and setter methods
 }
+
