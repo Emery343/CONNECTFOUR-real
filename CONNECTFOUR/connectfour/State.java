@@ -52,10 +52,10 @@ public class State
     }
 
     public void setBoardCell(int col, int value) {
-        if (col >= 0 && col < Constants.BOARD_COLUMNS) {
+        if (col >= 0 && col <= Constants.BOARD_COLUMNS) {
             boolean columnFull = true;
             for (int row = Constants.BOARD_ROWS - 1; row >= 0; row--) {
-                if (this.board[row][col] == ' ') {
+                if (this.board[row][col] == Constants.BLANK) {
                     this.board[row][col] = value;
                     columnFull = false; // At least one empty cell found, so column is not full
                     break;
@@ -72,14 +72,16 @@ public class State
     public boolean isWinner() {
         // Check rows, columns, and diagonals for a win
         for (int i = 0; i < Constants.BOARD_ROWS; i++) {
+            for (int j = 0; j < Constants.BOARD_ROWS - 3; j++) {
             // Check rows
-            if (board[i][0] == whoseMove && board[i][1] == whoseMove && board[i][2] == whoseMove) {
+            if (board[i][j] == whoseMove && board[i][j+1] == whoseMove && board[i][j+2] == whoseMove && board[i][j+3] == whoseMove) {
                 return true;
             }
             // Check columns
-            if (board[0][i] == whoseMove && board[1][i] == whoseMove && board[2][i] == whoseMove) {
+            if (board[j][i] == whoseMove && board[j+1][i] == whoseMove && board[j+2][i] == whoseMove && board[j+3][i] == whoseMove) {
                 return true;
             }
+        }
         }
 
         // Check diagonals
@@ -122,4 +124,5 @@ public class State
 
     // Getter and setter methods
 }
+
 

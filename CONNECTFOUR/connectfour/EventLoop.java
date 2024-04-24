@@ -30,28 +30,42 @@ public class EventLoop {
                 ui.printBoard(state);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
 
-                if (ui.isLegalMove(state,col)) {
-                    state.setGameState(Constants.MAKE_MOVE);
+                // Check if the selected column is full, prompt the user to choose another column if it is
+                while (!ui.isLegalMove(state, col)) {
+                    System.out.println(Constants.COLUMN_FULL);
+                    col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
                 }
+
+                // If the move is legal, proceed to MAKE_MOVE state
+                state.setGameState(Constants.MAKE_MOVE);
 
             } else if (gameState == Constants.GET_O_MOVE) {
                 ui.printBoard(state);
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
 
+                // Check if the selected column is full, prompt the user to choose another column if it is
                 if (ui.isLegalMove(state, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
+                } else {
+                    System.out.println(Constants.COLUMN_FULL);
                 }
 
             } else if (gameState == Constants.MAKE_MOVE) {
+                // Print the move made by the current player
                 ui.printMove(state, col);
-                int player = state.getWhoseMove(); // Get the current player
-                state.setBoardCell(col - 1, player); // Set the cell on the board
+                // Set the cell on the board
+                state.setBoardCell(col - 1, state.getWhoseMove());
+
+                // Transition to the next state to check for winner or tie
                 state.setGameState(Constants.CHECK_IF_WINNER);
+
             }else if (gameState == Constants.CHECK_IF_WINNER) {
                 if (state.isWinner()) {
                     if (state.getWhoseMove() == Constants.X) {
+                        ui.printBoard(state);
                         state.setGameState(Constants.X_WINS);
                     } else {
+                        ui.printBoard(state);
                         state.setGameState(Constants.O_WINS);
                     }
                 } else {
@@ -91,4 +105,5 @@ public class EventLoop {
         }
     }
 }
+
 

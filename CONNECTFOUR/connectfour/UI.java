@@ -28,8 +28,7 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int col) {
-        return 1 <= col && col <= Constants.BOARD_COLUMNS &&
-        state.getBoardCell(col, 0) == Constants.BLANK;
+        return col >= 1 && col <= Constants.BOARD_COLUMNS && state.getBoardCell(0, col - 1) == Constants.BLANK;
     }
 
     // Prompt for input methods
@@ -44,9 +43,6 @@ public class UI
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
-                if (col < 1 || col > Constants.BOARD_COLUMNS) {
-                    throw new IllegalArgumentException();
-                }
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_COLUMN);
                 scanner.nextLine(); // consume the invalid input
@@ -70,18 +66,17 @@ public class UI
         System.out.println(Constants.DIVIDER_STRING);
         for (int row = 0; row < Constants.BOARD_ROWS; row++) { 
             System.out.printf(Constants.BOARD_STRING, 
-            getXOrO(state.getBoardCell(row,0)), 
-            getXOrO(state.getBoardCell(row,1)), 
-            getXOrO(state.getBoardCell(row,2)), 
-            getXOrO(state.getBoardCell(row,3)), 
-            getXOrO(state.getBoardCell(row,4)), 
-            getXOrO(state.getBoardCell(row,5)),
-            getXOrO(state.getBoardCell(row,6)));
+                getXOrO(state.getBoardCell(row,0)), 
+                getXOrO(state.getBoardCell(row,1)), 
+                getXOrO(state.getBoardCell(row,2)), 
+                getXOrO(state.getBoardCell(row,3)), 
+                getXOrO(state.getBoardCell(row,4)), 
+                getXOrO(state.getBoardCell(row,5)),
+                getXOrO(state.getBoardCell(row,6)));
             System.out.println();   
             System.out.println(Constants.DIVIDER_STRING);
         } 
     }
-    
 
     public void printInvalidColumn(int Col) {
         System.out.printf(Constants.INVALID_COLUMN, Col);
@@ -111,4 +106,5 @@ public class UI
     }
 }
  
+
 
