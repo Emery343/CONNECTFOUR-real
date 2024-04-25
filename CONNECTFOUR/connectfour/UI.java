@@ -28,7 +28,7 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int col) {
-        return col >= 1 && col <= Constants.BOARD_COLUMNS && state.getBoardCell(0, col - 1) == Constants.BLANK;
+        return 1 <= col && col <= Constants.BOARD_COLUMNS && state.getBoardCell(0,col - 1) == Constants.BLANK;
     }
 
     // Prompt for input methods
@@ -39,7 +39,7 @@ public class UI
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
         int col = 0;
-        while (col <= 0 || col >= Constants.BOARD_COLUMNS) {
+        while (col <= 0 || col >= Constants.BOARD_COLUMNS + 1) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
@@ -106,5 +106,3 @@ public class UI
     }
 }
  
-
-

@@ -39,10 +39,8 @@ public class Constants
     public static final String INVALID_COLUMN = "Your column must be 1, 2, 3, 4, 5, 6, or 7.";
     public static final String INVALID_MOVE_ERROR = "Column %d is not a valid move. Please try again";
     public static final String COLUMN_FULL = "Column is full. Please choose another column.";
-    public static final String PRINT_MOVE = "Player %s (%s) move to %d";
+    public static final String PRINT_MOVE = "Player %s (%s) moved to Column %d";
     public static final String WINNER = "%s - %s is the winner!";
     public static final String TIE_GAME = "It's a tie game!";
     public static final String START_NEW_GAME = "Start a new game (Y or N)? -->";
 }
-
-

@@ -31,9 +31,10 @@ public class EventLoop {
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
 
                 // Check if the selected column is full, prompt the user to choose another column if it is
-                while (!ui.isLegalMove(state, col)) {
+                if (ui.isLegalMove(state, col)) {
+                    state.setGameState(Constants.MAKE_MOVE);
+                } else {
                     System.out.println(Constants.COLUMN_FULL);
-                    col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
                 }
 
                 // If the move is legal, proceed to MAKE_MOVE state
@@ -74,6 +75,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.CHECK_IF_TIE) {
                 if (state.isTie()) {
+                    ui.printWinner(state);
                     ui.printTieGame();
                     state.setGameState(Constants.GAME_OVER);
                 } else {
@@ -105,5 +107,3 @@ public class EventLoop {
         }
     }
 }
-
-

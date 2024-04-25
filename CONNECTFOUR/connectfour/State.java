@@ -73,23 +73,35 @@ public class State
         // Check rows, columns, and diagonals for a win
         for (int i = 0; i < Constants.BOARD_ROWS; i++) {
             for (int j = 0; j < Constants.BOARD_ROWS - 3; j++) {
-            // Check rows
-            if (board[i][j] == whoseMove && board[i][j+1] == whoseMove && board[i][j+2] == whoseMove && board[i][j+3] == whoseMove) {
-                return true;
+                // Check rows
+                if (board[i][j] == whoseMove && board[i][j+1] == whoseMove && board[i][j+2] == whoseMove && board[i][j+3] == whoseMove) {
+                    return true;
+                }
+                // Check columns
+                if (board[j][i] == whoseMove && board[j+1][i] == whoseMove && board[j+2][i] == whoseMove && board[j+3][i] == whoseMove) {
+                    return true;
+                }
+                //Check diagonals
+
             }
-            // Check columns
-            if (board[j][i] == whoseMove && board[j+1][i] == whoseMove && board[j+2][i] == whoseMove && board[j+3][i] == whoseMove) {
-                return true;
-            }
-        }
         }
 
-        // Check diagonals
-        if ((board[0][0] == whoseMove && board[1][1] == whoseMove && board[2][2] == whoseMove) ||
-        (board[0][2] == whoseMove && board[1][1] == whoseMove && board[2][0] == whoseMove)) {
-            return true;
+        // Check diagonals left to right
+        for (int i = Constants.BOARD_ROWS - 1; i >= Constants.BOARD_ROWS - 3; i--) { 
+            for (int j = 0; j < Constants.BOARD_ROWS - 2; j++) {
+                if (board[i][j] == whoseMove && board[i-1][j+1] == whoseMove && board[i-2][j+2] == whoseMove && board[i-3][j+3] == whoseMove) {
+                    return true;
+                }
+            }
         }
-
+        //Check diagonals right to left
+        for (int i = Constants.BOARD_ROWS - 1; i >= Constants.BOARD_ROWS - 3; i--) { 
+            for (int j = Constants.BOARD_COLUMNS - 1; j >= Constants.BOARD_COLUMNS - 4; j--) {
+                if (board[i][j] == whoseMove && board[i-1][j-1] == whoseMove && board[i-2][j-2] == whoseMove && board[i-3][j-3] == whoseMove) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -124,5 +136,3 @@ public class State
 
     // Getter and setter methods
 }
-
-
