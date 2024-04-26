@@ -22,7 +22,7 @@ public class Constants
     public static final int GET_X_MOVE = 3;
     public static final int GET_O_MOVE = 4;
     public static final int MAKE_MOVE = 5;
-    public static final int CHECK_IF_WINNER = 6;
+    public static final int CHECK_IF_THERE_IS_A_WINNER = 6;
     public static final int CHECK_IF_TIE = 7;
     public static final int X_WINS = 8;
     public static final int O_WINS = 9;

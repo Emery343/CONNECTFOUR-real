@@ -28,7 +28,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.GET_X_MOVE) {
                 ui.printBoard(state);
-                col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
+                col = ui.getMoveCol(state.getWhoseTurn(), state.getXName(), state.getOName());
 
                 // Check if the selected column is full, prompt the user to choose another column if it is
                 if (ui.isLegalMove(state, col)) {
@@ -42,7 +42,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.GET_O_MOVE) {
                 ui.printBoard(state);
-                col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
+                col = ui.getMoveCol(state.getWhoseTurn(), state.getXName(), state.getOName());
 
                 // Check if the selected column is full, prompt the user to choose another column if it is
                 if (ui.isLegalMove(state, col)) {
@@ -52,17 +52,12 @@ public class EventLoop {
                 }
 
             } else if (gameState == Constants.MAKE_MOVE) {
-                // Print the move made by the current player
                 ui.printMove(state, col);
-                // Set the cell on the board
-                state.setBoardCell(col - 1, state.getWhoseMove());
-
-                // Transition to the next state to check for winner or tie
-                state.setGameState(Constants.CHECK_IF_WINNER);
-
-            }else if (gameState == Constants.CHECK_IF_WINNER) {
+                state.setBoardCell(col - 1, state.getWhoseTurn());
+                state.setGameState(Constants.CHECK_IF_THERE_IS_A_WINNER);
+            }else if (gameState == Constants.CHECK_IF_THERE_IS_A_WINNER) {
                 if (state.isWinner()) {
-                    if (state.getWhoseMove() == Constants.X) {
+                    if (state.getWhoseTurn() == Constants.X) {
                         ui.printBoard(state);
                         state.setGameState(Constants.X_WINS);
                     } else {
@@ -79,8 +74,8 @@ public class EventLoop {
                     ui.printTieGame();
                     state.setGameState(Constants.GAME_OVER);
                 } else {
-                    state.setWhoseMove(state.getWhoseMove() * -1);
-                    if (state.getWhoseMove() == Constants.X) {
+                    state.setWhoseMove(state.getWhoseTurn() * -1);
+                    if (state.getWhoseTurn() == Constants.X) {
                         state.setGameState(Constants.GET_X_MOVE);
                     } else {
                         state.setGameState(Constants.GET_O_MOVE);

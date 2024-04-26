@@ -87,12 +87,12 @@ public class UI
     }
 
     public void printMove(State state, int col) {
-        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), col);
+        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseTurn()), getPlayerName(state.getWhoseTurn(), state.getXName(), state.getOName()), col);
         System.out.println();
     } 
 
     public void printWinner(State state) {
-        System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
+        System.out.printf(Constants.WINNER, getXOrO(state.getWhoseTurn()), getPlayerName(state.getWhoseTurn(), state.getXName(), state.getOName()));
         System.out.println();
     }
 
