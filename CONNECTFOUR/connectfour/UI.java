@@ -45,7 +45,7 @@ public class UI
                 col = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_COLUMN);
-                scanner.nextLine(); // consume the invalid input
+                scanner.nextLine(); 
             }
         }
         return col;

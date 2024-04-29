@@ -57,30 +57,28 @@ public class State
             for (int row = Constants.BOARD_ROWS - 1; row >= 0; row--) {
                 if (this.board[row][col] == Constants.BLANK) {
                     this.board[row][col] = value;
-                    columnFull = false; // At least one empty cell found, so column is not full
+                    columnFull = false;
                     break;
                 }
             }
-            if (columnFull) {
-                System.out.println(Constants.COLUMN_FULL);
-            }
-        } else {
-            System.out.println("Invalid column index.");
         }
     }
 
     public boolean isWinner() {
         for (int i = 0; i < Constants.BOARD_ROWS; i++) {
-            for (int j = 0; j < Constants.BOARD_ROWS - 3; j++) {
+            for (int j = 0; j < Constants.BOARD_COLUMNS - 3; j++) {
                 if (board[i][j] == whoseMove && board[i][j+1] == whoseMove && board[i][j+2] == whoseMove && board[i][j+3] == whoseMove) {
                     return true;
                 }
+            }
+        }
+        for (int i = 0; i < Constants.BOARD_ROWS; i++) {
+            for (int j = 0; j < Constants.BOARD_COLUMNS - 4; j++) { 
                 if (board[j][i] == whoseMove && board[j+1][i] == whoseMove && board[j+2][i] == whoseMove && board[j+3][i] == whoseMove) {
                     return true;
                 }
             }
         }
-
         for (int i = Constants.BOARD_ROWS - 1; i >= Constants.BOARD_ROWS - 3; i--) { 
             for (int j = 0; j < Constants.BOARD_ROWS - 2; j++) {
                 if (board[i][j] == whoseMove && board[i-1][j+1] == whoseMove && board[i-2][j+2] == whoseMove && board[i-3][j+3] == whoseMove) {

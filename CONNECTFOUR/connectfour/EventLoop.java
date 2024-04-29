@@ -70,7 +70,7 @@ public class EventLoop {
 
             } else if (gameState == Constants.CHECK_IF_TIE) {
                 if (state.isTie()) {
-                    ui.printWinner(state);
+                    ui.printBoard(state);
                     ui.printTieGame();
                     state.setGameState(Constants.GAME_OVER);
                 } else {
